@@ -10,4 +10,6 @@ macro(package_add_test_with_libraries TESTNAME FILES TEST_WORKING_DIRECTORY)
     target_compile_definitions(${TESTNAME} PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/graphs/")
 endmacro()
 
+include_directories(${PROJECT_SOURCE_DIR})
+
 package_add_test_with_libraries(graph_test graph_test.cpp "${CMAKE_SOURCE_DIR}" Graph)

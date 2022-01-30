@@ -1,4 +1,4 @@
-#include "../Graph.hpp"
+#include "Graph.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
