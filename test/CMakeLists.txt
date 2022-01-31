@@ -12,4 +12,4 @@ endmacro()
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-package_add_test_with_libraries(graph_test graph_test.cpp "${CMAKE_SOURCE_DIR}" Graph)
+package_add_test_with_libraries(graph_test graph_test.cpp "${CMAKE_SOURCE_DIR}" graph)
