@@ -370,7 +370,11 @@ Graph Graph::generate_subgraph(unordered_set<int> nodes) {
 
 
 vector<int> Graph::generate_hamiltonian_path(int seed) {
-    std::srand ( unsigned ( seed ) );
+    if (seed == -1) {
+        srand(time(NULL));
+    } else {
+        srand(unsigned(seed));
+    }
 
     vector<int> nodes(numNodes_);
     iota(nodes.begin(), nodes.end(), 0);
