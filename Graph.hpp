@@ -20,6 +20,7 @@ namespace qaoagraph {
     
 class Graph {
 private:
+    bool set_seed_flag = false;
     int numNodes_;
     int numEdges_;
     bool directed_;
@@ -30,6 +31,8 @@ private:
     bool topo_order_need_update_ = true;
     vector<int> topo_order_;
     vector<int> rev_topo_order_;
+
+    void set_seed(int seed);
 
     void update_topo_order();
     void topo_sort_util(int v, vector<bool> &visited, vector<int> &topo_order);
@@ -99,7 +102,7 @@ public:
     Graph generate_subgraph(unordered_set<int> nodes);
 
     // TODO: naive implementation O(N*N!), use DP can be O(N*2^N)
-    vector<int> generate_hamiltonian_path(int seed);
+    vector<int> generate_hamiltonian_path(int seed = -1);
 };
 
 }  // namespace: qaoagraph

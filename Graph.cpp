@@ -368,13 +368,19 @@ Graph Graph::generate_subgraph(unordered_set<int> nodes) {
     return subgraph;
 }
 
-
-vector<int> Graph::generate_hamiltonian_path(int seed) {
+void Graph::set_seed(int seed) {
+    if (set_seed_flag) return;
     if (seed == -1) {
-        srand(time(NULL));
+        srand(time(0));
     } else {
         srand(unsigned(seed));
     }
+    set_seed_flag = true;
+}
+
+
+vector<int> Graph::generate_hamiltonian_path(int seed) {
+    set_seed(seed);
 
     vector<int> nodes(numNodes_);
     iota(nodes.begin(), nodes.end(), 0);
@@ -382,7 +388,6 @@ vector<int> Graph::generate_hamiltonian_path(int seed) {
 
     vector<int> index(numNodes_);
     iota(index.begin(), index.end(), 0);
-    
 
     bool findFlag = true;
     do{
