@@ -10,6 +10,9 @@
 #include <stack>
 #include <unordered_set>
 #include <unordered_map>
+#include <ctime>
+#include <cstdlib>
+#include <numeric>
 
 using namespace std;
 
@@ -94,6 +97,9 @@ public:
     unordered_set<int> get_candidate_set(int u, Graph &g);
 
     Graph generate_subgraph(unordered_set<int> nodes);
+
+    // TODO: naive implementation O(N*N!), use DP can be O(N*2^N)
+    vector<int> generate_hamiltonian_path(int seed);
 };
 
 }  // namespace: qaoagraph

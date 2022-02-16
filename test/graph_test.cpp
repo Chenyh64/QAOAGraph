@@ -346,6 +346,22 @@ TEST_F(GraphTest, SimpleCycleTest) {
    EXPECT_THAT(cycles, testing::UnorderedElementsAreArray(correct_cycles));  
 }
 
+TEST_F(GraphTest, HamiltonianPathTest) {
+   Graph testG1;
+   string testGraphPath = resource_dir + "8_3_1.txt";
+   ifstream graphFile(testGraphPath);
+   if (!graphFile.is_open() || !testG1.load_from_file(graphFile)) {
+      cerr << "Cannot load graph file " << testGraphPath << ".\n";
+      FAIL();
+   }
+   for (int seed = 0; seed < 10; ++seed) {
+      auto hampath = testG1.generate_hamiltonian_path(seed);
+      for (int i = 0; i < hampath.size() - 1; ++i) {
+         EXPECT_EQ(testG1.has_edge(hampath[i], hampath[i + 1]), true);
+      }
+   }
+}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

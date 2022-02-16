@@ -368,4 +368,36 @@ Graph Graph::generate_subgraph(unordered_set<int> nodes) {
     return subgraph;
 }
 
+
+vector<int> Graph::generate_hamiltonian_path(int seed) {
+    std::srand ( unsigned ( seed ) );
+
+    vector<int> nodes(numNodes_);
+    iota(nodes.begin(), nodes.end(), 0);
+    random_shuffle ( nodes.begin(), nodes.end() );
+
+    vector<int> index(numNodes_);
+    iota(index.begin(), index.end(), 0);
+    
+
+    bool findFlag = true;
+    do{
+        // check if it is a hamiltonian path.
+        findFlag = true;
+        for (int i = 0; i < numNodes_ - 1; ++i) {
+            if (!has_edge(nodes[index[i]], nodes[index[i + 1]])) {
+                findFlag = false;
+                break;
+            }
+        }
+    } while(findFlag == false && next_permutation(index.begin(), index.end()));
+    if (findFlag == false) return {};
+
+    vector<int> ret;
+    for (int i = 0; i < numNodes_; ++i) {
+        ret.push_back(nodes[index[i]]);
+    }
+    return ret;
+}
+
 }  // namespace: qaoagraph
