@@ -192,13 +192,16 @@ TEST_F(GraphTest, UndirectedGraphDAGTest) {
    Graph g = generate_fig5(false);
    Graph g_dag = g.generate_dag(0);
    EXPECT_EQ(g_dag.num_edges(), g.num_edges());
+   g.generate_edge_checker();
    for (auto edge : g_dag.get_edges()) {
       EXPECT_EQ(g.has_edge(edge[0], edge[1]), true);
+      EXPECT_EQ(g.has_edge_quick(edge[0], edge[1]), true);
    }
    g_dag = g.generate_dag(1);
    EXPECT_THAT(g_dag.num_edges(), g.num_edges());
    for (auto edge : g_dag.get_edges()) {
       EXPECT_EQ(g.has_edge(edge[0], edge[1]), true);
+      EXPECT_EQ(g.has_edge_quick(edge[0], edge[1]), true);
    }
    // vector<vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 4}, {1, 5}, {2, 6}, {3, 7}, {6, 5}, {6, 8}};
    // EXPECT_THAT(g.generate_dag(0).get_edges(), testing::UnorderedElementsAreArray(edges));

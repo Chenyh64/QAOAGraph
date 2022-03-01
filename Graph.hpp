@@ -27,6 +27,7 @@ private:
     vector<int> in_degree_;
     vector<int> out_degree_;
     vector<unordered_set<int>> adjList_;
+    vector<vector<bool>> EdgeChecker_;
 
     bool topo_order_need_update_ = true;
     vector<int> topo_order_;
@@ -66,6 +67,19 @@ public:
 
     vector<vector<int>> get_edges();
     const unordered_set<int> &get_neighbors(int u) const { return adjList_[u]; }
+
+    void generate_edge_checker() { 
+        EdgeChecker_ = vector<vector<bool>>(numNodes_, vector<bool>(numNodes_, false));
+        for (int i = 0; i < numNodes_; i++) {
+            for (int j = 0; j < numNodes_; j++) {
+                if (has_edge(i, j)) EdgeChecker_[i][j] = true;
+            }
+        }
+    }
+
+    bool has_edge_quick(int u, int v) {
+        return EdgeChecker_[u][v];
+    }
 
     bool has_edge(int u, int v) {
         return adjList_[u].find(v) != adjList_[u].end();
