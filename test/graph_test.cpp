@@ -382,6 +382,16 @@ TEST_F(GraphTest, FloydWarshallTest) {
    EXPECT_EQ(dist, correct_dist);
 }
 
+TEST_F(GraphTest, DiameterTest) {
+   Graph testG;
+   string testGraphPath = resource_dir + "square.txt";
+   ifstream graphFile(testGraphPath);
+   if (!graphFile.is_open() || !testG.load_from_file(graphFile)) {
+      cerr << "Cannot load graph file " << testGraphPath << ".\n";
+      FAIL();
+   }
+   EXPECT_EQ(testG.diameter(), 2);
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

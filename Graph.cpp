@@ -433,4 +433,13 @@ vector<vector<int>> Graph::floyd_warshall() {
     return dist;
 }
 
+int Graph::diameter() {
+    auto dist = floyd_warshall();
+    int diameter = 0;
+    for (auto row : dist) {
+        diameter = max(diameter, *max_element(row.begin(), row.end()));
+    }
+    return diameter;
+}
+
 }  // namespace: qaoagraph

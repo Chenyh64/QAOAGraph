@@ -119,6 +119,8 @@ public:
     vector<int> generate_hamiltonian_path(int seed = -1);
 
     vector<vector<int>> floyd_warshall();
+
+    int diameter();
 };
 
 }  // namespace: qaoagraph
