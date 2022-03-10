@@ -409,4 +409,28 @@ vector<int> Graph::generate_hamiltonian_path(int seed) {
     return ret;
 }
 
+vector<vector<int>> Graph::floyd_warshall() {
+    int INF = 99999;
+    vector<vector<int>> dist(numNodes_, vector<int>(numNodes_, INF));
+    for (int i = 0; i < numNodes_; i++) {
+        for (int j = 0; j < numNodes_; j++) {
+            if (i == j) dist[i][j] = 0;
+            else if (has_edge(i, j)) dist[i][j] = 1;
+        }
+    }
+
+    for (int k = 0; k < numNodes_; k++) {
+        for (int i = 0; i < numNodes_; i++) {
+            for (int j = 0; j < numNodes_; j++) {
+                if (dist[i][j] > (dist[i][k] + dist[k][j]) &&
+                    (dist[k][j] != INF && dist[i][k] != INF)) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    return dist;
+}
+
 }  // namespace: qaoagraph

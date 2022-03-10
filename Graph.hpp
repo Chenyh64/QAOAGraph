@@ -117,6 +117,8 @@ public:
 
     // TODO: naive implementation O(N*N!), use DP can be O(N*2^N)
     vector<int> generate_hamiltonian_path(int seed = -1);
+
+    vector<vector<int>> floyd_warshall();
 };
 
 }  // namespace: qaoagraph

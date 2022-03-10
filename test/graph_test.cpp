@@ -365,6 +365,23 @@ TEST_F(GraphTest, HamiltonianPathTest) {
    }
 }
 
+TEST_F(GraphTest, FloydWarshallTest) {
+   Graph testG;
+   string testGraphPath = resource_dir + "square.txt";
+   ifstream graphFile(testGraphPath);
+   if (!graphFile.is_open() || !testG.load_from_file(graphFile)) {
+      cerr << "Cannot load graph file " << testGraphPath << ".\n";
+      FAIL();
+   }
+
+   auto dist = testG.floyd_warshall();
+   vector<vector<int>> correct_dist = {{0, 1, 2, 1},
+                                       {1, 0, 1, 2},
+                                       {2, 1, 0, 1},
+                                       {1, 2, 1, 0}};
+   EXPECT_EQ(dist, correct_dist);
+}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
